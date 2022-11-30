@@ -1,24 +1,39 @@
-# Cross site scripting atack
+# Buffer Overflow Atack
 *Noviembre 30 de 2022*, Ramón Peinado Ruiz
 
 
 
-XSS o Cross-site scripting es un tipo de inyección la cual hace uso de scripts maliciosos*(malware basado en código)* que son inyectados en paginas webs de confianza.
+Buffer overflow o desbordamiento de buffer, es una vulnerabilidad o anomalía donde un programa escribe datos en un buffer*(Región de memoria usada temporalmente para almacenamiento de datos)* y sobrepasa el limite de este mismo sobrescribiendo las posiciones contiguas(*Donde se puede ejecutar codigo malicioso*).
 
-Este tipo de ataque suele ser usado para robar información, secuestrar sesiones o comprometer el navegador.
 
-<img src="/img/1ºimagenn.png" alt="1ºimagenn"  />
 
-Podemos encontrarnos este tipo de ataque en dos formas distintas:
+Normalmente este tipo de fallos se usan para ejecutar código en un equipo, en algunos casos llegan a tomar el control del equipo o los convierte en zombies para ataques DoS.
 
-- Persistente: Consiste en insertar el script malicioso escrito en HTML en paginas *(con etiquetas como <script> o <iframe>)*  en webs donde haya vulnerabilidades para hacerlo. 
 
-  <img src="/img/2ºimagenn.png" alt="2ºimagenn"  />
 
-- Reflejada: Se trata de modificar valores que la web usa para pasar variables entre dos paginas, sin usar sesiones y se da cuando:
+Los atacantes aprovechan esta vulnerabilidad sobrescribiendo espacios de memoria real donde se pueden incluir instrucciones para abrir un shell.
 
-  - Hay un mensaje o una ruta en la URL del navegador (Mensaje de error...).
+Se puede dar en:
 
-  - En una cookie.
+- SO's
+- Protocolos
 
-    <img src="/img/3ºimagenn.png" alt="3ºimagenn"  />
+Consecuencias:
+
+- Denegación de servicio del software.
+- Tomar control del EIP para ejecutar código.
+- Tomar control del EIP desde la cuenta de un usuario con privilegios.
+
+
+
+### Registros de CPU
+
+Registros de CPU donde se pueden dirigir el desbordamiento del *buffer*:
+
+- **EIP**: indica la siguiente dirección de memoria que el ordenador debería ejecutar.
+- **EAX**: almacena temporalmente cualquier dirección de retorno.
+- **EBX**: almacena datos y direcciones de memoria.
+- **ESI**: contiene la dirección de memoria de los datos de entrada.
+- **ESP**: se usa para referenciar el inicio de un hilo.
+- **EBP**: indica la dirección de memoria del final de un hilo.
+
